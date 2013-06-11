@@ -5,11 +5,11 @@
   }else if (typeof module !== 'undefined' && module.exports){
     factory(require, exports, module)
   }else if (typeof window !== 'undefined'){
-    var module = {exports: {}}
+    var mod = {exports: {}}
     factory(function(lib){
       return window[lib]
-    }, module.exports, module)
-    window.BodyDouble = module.exports
+    }, mod.exports, mod)
+    window.BodyDouble = mod.exports
   }
 
 }(function(require, exports, module){
