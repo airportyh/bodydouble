@@ -1,0 +1,25 @@
+{
+  "name": "bodydouble",
+  "version": "0.0.0",
+  "description": "A kind of mock library that returns mock that conform to the interface of the mocked object.",
+  "main": "index.js",
+  "directories": {
+    "example": "examples"
+  },
+  "dependencies": {
+    "ispy": "~0.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "testem ci -l phantomjs"
+  },
+  "repository": "",
+  "keywords": [
+    "testing",
+    "mock",
+    "spy"
+  ],
+  "author": "Toby Ho",
+  "license": "MIT",
+  "gitHead": "547124e75587ffbf5b008ed69578d2bf72ce2458"
+}
