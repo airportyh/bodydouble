@@ -73,6 +73,35 @@ test('doesnt let you override methods that were not there', function(){
   }, 'Tried to override non-existing method(s): sing')
 })
 
+test('stubbing', function(){
+  var bob = {
+    walk: function(){},
+    talk: function(){}
+  }
+  BodyDouble.stub(bob, 'walk').returns(1)
+  assert.equal(bob.walk(), 1)
+})
+
+test('doesnt let you stub if method werent there', function(){
+  var bob = {
+    walk: function(){},
+    talk: function(){}
+  }
+  assert.throw(function(){
+    BodyDouble.stub(bob, 'sing').returns(1)
+  }, 'Tried to stub a non-existing method: sing')
+})
+
+test('restores stubs', function(){
+  var walk = function(){}
+  var bob = {
+    walk: walk
+  }
+  BodyDouble.stub(bob, 'walk').returns(1)
+  BodyDouble.restoreStubs()
+  assert.strictEqual(bob.walk, walk)
+})
+
 function keys(obj){
   var keys = []
   for (var prop in obj){

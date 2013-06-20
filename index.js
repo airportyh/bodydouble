@@ -42,6 +42,23 @@ function BodyDouble(obj, opts){
   return ret
 }
 
+BodyDouble.stubs = []
+BodyDouble.stub = function(obj, method){
+  if (typeof obj[method] !== 'function'){
+    throw new Error('Tried to stub a non-existing method: ' + method)
+  }
+  BodyDouble.stubs.push({obj: obj, method: method, original: obj[method]})
+  return obj[method] = spy()
+}
+
+BodyDouble.restoreStubs = function(){
+  for (var i = 0; i < BodyDouble.stubs.length; i++){
+    var stub = BodyDouble.stubs[i]
+    stub.obj[stub.method] = stub.original
+  }
+  BodyDouble.stubs = []
+}
+
 function keys(obj){
   if (Object.keys) return Object.keys(obj)
   var ret = []
