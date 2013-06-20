@@ -32,6 +32,47 @@ test('doesnt include "private" methods or non-functions', function(){
   assert.deepEqual(keys(fakeBob), ['walk', 'talk'])
 })
 
+test('fluent methods', function(){
+  var bob = {
+    walk: function(){},
+    talk: function(){}
+  }
+  var fakeBob = BodyDouble(bob, {fluent: true})
+  assert.equal(fakeBob.walk().talk(), fakeBob)
+})
+
+test('overrides functions', function(){
+  var bob = {
+    walk: function(){},
+    talk: function(){}
+  }
+  var calledWalk = false
+  var fakeBob = BodyDouble(bob, {
+    override: {
+      walk: function(){
+        calledWalk = true
+        return 'blah'
+      }
+    }
+  })
+  assert.equal(fakeBob.walk(), 'blah')
+  assert(calledWalk)
+})
+
+test('doesnt let you override methods that were not there', function(){
+  var bob = {
+    walk: function(){},
+    talk: function(){}
+  }
+  assert.throw(function(){
+    var fakeBob = BodyDouble(bob, {
+      override: {
+        sing: function(){}
+      }
+    })
+  }, 'Tried to override non-existing method(s): sing')
+})
+
 function keys(obj){
   var keys = []
   for (var prop in obj){
