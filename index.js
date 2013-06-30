@@ -16,7 +16,10 @@
 
 var spy = require('ispy')
 
-function BodyDouble(obj, opts){
+var BodyDouble = {}
+
+BodyDouble.mock = mock
+function mock(obj, opts){
   opts = opts || {}
   var overrides = opts.override || {}
   var ret = {}
@@ -44,11 +47,15 @@ function BodyDouble(obj, opts){
 
 BodyDouble.stubs = []
 BodyDouble.stub = function(obj, method){
-  if (typeof obj[method] !== 'function'){
-    throw new Error('Tried to stub a non-existing method: ' + method)
-  }
   BodyDouble.stubs.push({obj: obj, method: method, original: obj[method]})
-  return obj[method] = spy()
+  if (arguments.length === 2){
+    if (typeof obj[method] !== 'function'){
+      throw new Error('Tried to stub a non-existing method: ' + method)
+    }
+    return obj[method] = spy()
+  }else if (arguments.length === 3){
+    return obj[method] = arguments[2]
+  }
 }
 
 BodyDouble.restoreStubs = function(){
