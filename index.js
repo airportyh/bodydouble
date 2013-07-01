@@ -54,6 +54,9 @@ BodyDouble.stub = function(obj, method){
     }
     return obj[method] = spy()
   }else if (arguments.length === 3){
+    if (!(method in obj)){
+      throw new Error('Tried to stub a non-existing property: ' + method)
+    }
     return obj[method] = arguments[2]
   }
 }

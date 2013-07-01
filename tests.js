@@ -106,6 +106,13 @@ test('doesnt let you stub if method werent there', function(){
   }, 'Tried to stub a non-existing method: sing')
 })
 
+test('doesnt let you stub value if property werent there', function(){
+  var bob = {}
+  assert.throw(function(){
+    stub(bob, 'age', 10)
+  }, 'Tried to stub a non-existing property') 
+})
+
 test('restores stubs', function(){
   var walk = function(){}
   var bob = {
