@@ -3,6 +3,6 @@
   "version": "0.1.1",
   "main": "index.js",
   "dependencies": {
-    "ispy": "*"
+    "ispy": "~0.1.0"
   }
 }

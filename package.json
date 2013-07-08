@@ -7,12 +7,16 @@
     "example": "examples"
   },
   "dependencies": {
-    "ispy": "~0.0.1"
+    "ispy": "~0.1.0"
   },
   "devDependencies": {},
   "scripts": {
     "test": "testem ci -l phantomjs"
   },
+  "files": [
+    "index.js",
+    "README.md"
+  ],
   "repository": "",
   "keywords": [
     "testing",
